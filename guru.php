@@ -36,9 +36,9 @@ if ($prev->minima < 10) {
 if ($prev->maxima == $prev->minima) {
     $status .= "E tende à permanecer o dia assim, sem grandes alterações. ";
 } elseif ($prev->maxima - $prev->minima > 7) {
-    $status .= "À tarde a temperatura varia " . $prev->maxima - $prev->minima . "ºC, com máxima de " . $prev->maxima . "ºC. ";
+    $status .= "À tarde a temperatura varia " .( $prev->maxima - $prev->minima ). "ºC, com máxima de " . $prev->maxima . "ºC. ";
 } else {
-    $status .= "A temperatura não varia radicalmente, temperatura máxima de " . $prev->maxima . "ºC. ";
+    $status .= "Sem variações radicais, a temperatura máxima é de " . $prev->maxima . "ºC. ";
 }
 
 
@@ -61,7 +61,7 @@ if ($prev->precipitacao > 0) {
         if ($prev->maxima < 18) {
             $status2 .= "Nesse dia frio, a chuva de " . $prev->precipitacao . "mm já obriga os pelotenses a utilizar canoas em determinados cruzamentos da cidade.";
         } else {
-            $status2 .= "Com o calor e chuva de " . $prev->precipitacao . "mm, em certos lugares de Pelotas já é preciso cruzar de bote.";
+            $status2 .= "Com o calor de até ".$prev->maxima."ºC e chuva de " . $prev->precipitacao . "mm, em certos lugares de Pelotas já é preciso cruzar de bote.";
         }
     } else {
         if ($prev->maxima < 18) {
@@ -78,6 +78,7 @@ if ($prev->precipitacao > 0) {
     for ($a = 0; $a < 5; $a++) {
         try {
             $reply = $cb->statuses_update($params2);
+            var_dump($reply);
             break;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -88,6 +89,7 @@ if ($prev->precipitacao > 0) {
 for ($a = 0; $a < 5; $a++) {
     try {
         $reply = $cb->statuses_update($params);
+        var_dump($reply);
         break;
     } catch (Exception $e) {
         echo $e->getMessage();
